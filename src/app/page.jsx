@@ -1,8 +1,8 @@
 "use client";
-
+import Link from 'next/link'
 import { useEffect, useState } from "react";
 import { Test } from "./_components/Test";
-
+import {Text} from "./_components/Text"
 const Page = () => {
   const [countries, setCountries] = useState([]);
   const [inputValue, setInputValue] = useState("")
@@ -46,9 +46,17 @@ const Page = () => {
           
       </div>
       <div className="flex flex-wrap gap-8 w-[2000px] ml-[50px] mt-[50px]">
-         {filterCountry.map((country,index ) =>  {
-          return <Test flagUrl= {country.flags.png} key={index} flagName = {country.name.official}/>
-        })}
+         {filterCountry.length > 0 ? filterCountry.map((country,index ) => 
+          {
+            return ( 
+          
+          <Link key={index} href={country.name.official}>
+          <Test flagUrl= {country.flags.png}  flagName = {country.name.official}/>
+          </Link>);
+        }) : <Text/>
+        
+        } 
+      
       </div>
     </div>
     
